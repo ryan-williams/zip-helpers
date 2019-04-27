@@ -6,5 +6,6 @@ defn tx tar xf
 defn txf tar xf
 defn tv tar xvf
 defn tvf tar xvf
+defn ttf tar tf
 
 defn sha64 sha1base64
