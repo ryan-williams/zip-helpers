@@ -1,6 +1,7 @@
 
-alias uzd=unzip-dir
-alias uz="unzip-dir"
+defn uz unzip
+defn uzd unzip-dir
+defn uzl unzip -l
 
 defn tx tar xf
 defn txf tar xf
