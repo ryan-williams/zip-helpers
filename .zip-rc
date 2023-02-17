@@ -2,6 +2,7 @@
 defn uz unzip
 defn uzd unzip-dir
 defn uzl unzip -l
+defn uzp unzip -p
 
 defn tx tar xf
 defn txf tar xf

@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+# pop last arg
+last="${@:(($#))}"
+set -- "${@:1:$(($#-1))}"
+
+gs -q -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sOutputFile="$last" "$@"

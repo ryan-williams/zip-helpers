@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+set -e
+
+in="$1"; shift
+dir="$(dirname "$in")"
+
+set -x
+soffice --headless --convert-to pdf:writer_pdf_Export --outdir "$dir" "$in"
