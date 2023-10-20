@@ -12,3 +12,5 @@ defn ttf tar tf
 defn txf tar xfO
 
 defn sha64 sha1base64
+
+defn gzc gzip -c
