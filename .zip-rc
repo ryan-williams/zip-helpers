@@ -14,3 +14,12 @@ defn txf tar xfO
 defn sha64 sha1base64
 
 defn gzc gzip -c
+
+gzip_copy() {
+    for arg in "$@"; do
+        gzip -c $arg > $arg.gz
+    done
+}
+export -f gzip_copy
+defn gzic gzip_copy
+defn gzcp gzip_copy
