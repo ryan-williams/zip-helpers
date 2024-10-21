@@ -13,6 +13,8 @@ defn txf tar xfO
 
 defn sha64 sha1base64
 
+defn guc gunzip -c
+defn guz gunzp
 defn gzc gzip -c
 
 gzip_copy() {
@@ -23,3 +25,16 @@ gzip_copy() {
 export -f gzip_copy
 defn gzic gzip_copy
 defn gzcp gzip_copy
+
+gunzip_pipe() {
+    if [ $# -eq 1 ]; then
+        cat | gunzip -c | "$1"
+    else
+        # last arg
+        gz="${@: -1}"
+        set -- "${@:1:$(($#-1))}"
+        gunzip -c "$gz" | "$@"
+    fi
+}
+export -f gunzip_pipe
+defn up gunzip_pipe
