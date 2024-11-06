@@ -38,3 +38,4 @@ gunzip_pipe() {
 }
 export -f gunzip_pipe
 defn up gunzip_pipe
+defn upc gunzip_pipe cat
