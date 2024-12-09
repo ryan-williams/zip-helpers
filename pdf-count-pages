@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+if [ $# -ne 1 ]; then
+  echo "Usage: $0 <file>" >&2
+  exit 1
+fi
+file="$1"; shift
+
+if command -v pdfinfo >/dev/null 2>&1; then
+  pages=$(pdfinfo "$file" | grep "Pages:" | awk '{print $2}')
+  echo "$pages"
+  exit 0
+fi
+
+# Fallback to pdftk if available
+if command -v pdftk >/dev/null 2>&1; then
+  pages=$(pdftk "$file" dump_data | grep "NumberOfPages" | awk '{print $2}')
+  echo "$pages"
+  exit 0
+fi
+
+# Final fallback to exiftool if available
+if command -v exiftool >/dev/null 2>&1; then
+  pages=$(exiftool -PageCount "$file" | awk '{print $3}')
+  echo "$pages"
+  exit 0
+fi
+
+echo "Error: No PDF tools found. Please install pdfinfo, pdftk, or exiftool" >&2
+exit 1
