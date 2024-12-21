@@ -41,3 +41,8 @@ defn up gunzip_pipe
 defn upc gunzip_pipe cat
 
 defn pcp pdf-count-pages
+
+defn ze zip-extract -p
+defn zel zip-extract -l
+defn zep zip-extract -p
+defn zex zip-extract -p

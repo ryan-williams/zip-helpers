@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+#
+# Traverse possibly nested zip files, extract a file or list files.
+
+usage() {
+    echo "Usage: $0 [-p | -l] <zip file> [nested zip paths...] <path>" >&2
+    exit 1
+}
+
+if [ "$1" == -p ]; then
+    opt=-p; shift
+elif [ "$1" == -l ]; then
+    opt=-l; shift
+else
+    usage
+fi
+if [ $# -lt 2 ]; then
+    usage
+fi
+
+zip="$1"; shift
+path="$1"; shift
+tmpfile="$(mktemp)"
+cleanup() {
+    # echo "Cleaning up $tmpfile" >&2
+    rm -f "$tmpfile"
+}
+trap cleanup EXIT
+
+unzip -p "$zip" "$path" > "$tmpfile"
+if [ $# -gt 0 ]; then
+    zip-extract "$opt" "$tmpfile" "$@"
+elif [ "$opt" == -p ]; then
+    cat "$tmpfile"
+else
+    unzip -l "$tmpfile"
+fi
